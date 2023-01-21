@@ -1,4 +1,12 @@
 {
+  "name": "near-sdk-js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "example": "examples",
+    "test": "tests"
+  },
   "scripts": {
     "build": "turbo run build",
     "test": "turbo run test",
@@ -7,5 +15,11 @@
   },
   "devDependencies": {
     "turbo": "^1.4.5"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cryptoghost26/near-sdk-js.git"
+  },
+  "author": "",
+  "license": "ISC"
 }
