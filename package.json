@@ -1,12 +1,7 @@
 {
-  "name": "near-sdk-js",
+  "name": "near-sdk-js-repo",
   "version": "1.0.0",
   "description": "",
-  "bin": {
-    "near-sdk-js": "packages/near-sdk-js/lib/cli/cli.js"
-  },
-  "main": "packages/near-sdk-js/lib/index.js",
-  "types": "packages/near-sdk-js/lib/index.d.ts",
   "type": "module",
   "scripts": {
     "build": "turbo run build",
