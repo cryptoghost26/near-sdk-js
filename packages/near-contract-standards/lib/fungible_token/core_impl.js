@@ -24,11 +24,12 @@ const ERR_TOTAL_SUPPLY_OVERFLOW = "Total supply overflow";
  */
 export class FungibleToken {
     // TODO: constructor is used instead of new in Rust, check if it's ok. In NFT it's called init, why?.
-    constructor(prefix) {
+    constructor(prefix, owner_id, total_supply) {
         const storage_prefix = prefix.into_storage_key();
         this.accounts = new LookupMap(storage_prefix);
         this.total_supply = 0n;
         this.account_storage_usage = 0n;
+        this.internal_deposit(owner_id, total_supply);
         this.measure_account_storage_usage();
     }
     measure_account_storage_usage() {
@@ -39,7 +40,9 @@ export class FungibleToken {
         this.accounts.remove(tmp_account_id);
     }
     internal_unwrap_balance_of(account_id) {
-        let balance = this.accounts.get(account_id);
+        let balance = this.accounts.get(account_id, {
+            defaultValue: 0n
+        });
         if (balance === null) {
             throw Error(`The account ${account_id} is not registered`);
         }

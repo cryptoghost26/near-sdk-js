@@ -47,11 +47,12 @@ export class FungibleToken implements FungibleTokenCore, StorageManagement, Fung
     account_storage_usage: StorageUsage;
 
     // TODO: constructor is used instead of new in Rust, check if it's ok. In NFT it's called init, why?.
-    constructor(prefix: IntoStorageKey) {
+    constructor(prefix: IntoStorageKey, owner_id:string, total_supply:bigint) {
         const storage_prefix = prefix.into_storage_key();
         this.accounts = new LookupMap<Balance>(storage_prefix);
         this.total_supply = 0n;
         this.account_storage_usage = 0n;
+        this.internal_deposit(owner_id, total_supply);
         this.measure_account_storage_usage();
     }
 
@@ -67,7 +68,9 @@ export class FungibleToken implements FungibleTokenCore, StorageManagement, Fung
 
     @view({})
     internal_unwrap_balance_of(account_id: AccountId): Balance {
-        let balance = this.accounts.get(account_id);
+        let balance = this.accounts.get(account_id, {
+            defaultValue: 0n
+        });
         if (balance === null) {
             throw Error(`The account ${account_id} is not registered`);
         }
