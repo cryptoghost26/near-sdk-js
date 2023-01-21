@@ -2,11 +2,12 @@
   "name": "near-sdk-js",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
-  "directories": {
-    "example": "examples",
-    "test": "tests"
+  "bin": {
+    "near-sdk-js": "packages/near-sdk-js/lib/cli/cli.js"
   },
+  "main": "packages/near-sdk-js/lib/index.js",
+  "types": "packages/near-sdk-js/lib/index.d.ts",
+  "type": "module",
   "scripts": {
     "build": "turbo run build",
     "test": "turbo run test",
